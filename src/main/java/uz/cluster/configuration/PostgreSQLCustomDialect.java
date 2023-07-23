@@ -1,7 +1,7 @@
 package uz.cluster.configuration;
 
 import org.hibernate.dialect.PostgreSQL10Dialect;
-import uz.cluster.db.types.Nls;
+import uz.cluster.types.Nls;
 
 import java.sql.Types;
 

@@ -6,11 +6,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import uz.cluster.db.services.auth_service.AuthService;
+import uz.cluster.services.auth_service.AuthService;
 import uz.cluster.payload.auth.UserDTO;
 import uz.cluster.payload.response.ApiResponse;
 

@@ -3,7 +3,7 @@ package uz.cluster.configuration;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import uz.cluster.db.entity.auth.User;
+import uz.cluster.entity.auth.User;
 
 import javax.validation.constraints.NotNull;
 import java.util.Optional;

@@ -5,9 +5,9 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.cluster.db.entity.references.model.Role;
-import uz.cluster.db.repository.references.FormRepository;
-import uz.cluster.db.services.auth_service.RoleService;
+import uz.cluster.entity.references.model.Role;
+import uz.cluster.repository.references.FormRepository;
+import uz.cluster.services.auth_service.RoleService;
 import uz.cluster.payload.auth.RoleDTO;
 import uz.cluster.payload.response.ApiResponse;
 

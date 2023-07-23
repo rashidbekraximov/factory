@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import uz.cluster.db.services.auth_service.AuthUserService;
+import uz.cluster.services.auth_service.AuthUserService;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(

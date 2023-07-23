@@ -7,11 +7,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.cluster.db.composite_keys.FormDao;
-import uz.cluster.db.entity.references.model.Form;
-import uz.cluster.db.repository.references.FormRepository;
-import uz.cluster.db.services.references_service.FormService;
-import uz.cluster.db.types.Nls;
+import uz.cluster.dao.FormDao;
+import uz.cluster.entity.references.model.Form;
+import uz.cluster.repository.references.FormRepository;
+import uz.cluster.services.references_service.FormService;
+import uz.cluster.types.Nls;
 import uz.cluster.payload.response.ApiResponse;
 
 import java.util.List;

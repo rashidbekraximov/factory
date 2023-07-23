@@ -11,10 +11,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import uz.cluster.db.entity.auth.User;
-import uz.cluster.db.model.SessionDto;
-import uz.cluster.db.model.response.AppErrorDto;
-import uz.cluster.db.model.response.DataDto;
+import uz.cluster.entity.auth.User;
+import uz.cluster.dao.SessionDto;
+import uz.cluster.response.AppErrorDto;
+import uz.cluster.response.DataDto;
 import uz.cluster.payload.auth.LoginDTO;
 
 import javax.servlet.FilterChain;

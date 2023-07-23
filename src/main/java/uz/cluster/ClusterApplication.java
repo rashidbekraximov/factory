@@ -24,8 +24,8 @@ import uz.cluster.configuration.OpenApiProperties;
 @Configuration
 @EnableJpaRepositories(value = {"uz.cluster.*"})
 @ComponentScan(value = {"uz.cluster.*", "uz.cluster.configuration", "uz.cluster.util"})
-@EntityScan(basePackages = {"uz.cluster.db.entity.forms", "uz.cluster.db.entity.auth", "uz.cluster.db.model", "uz.cluster.db.entity.references.model", "uz.cluster.db.composite_keys", "uz.cluster.db.services.form_services", "uz.cluster.db.services"})
-@SpringBootApplication(scanBasePackages = {"uz.cluster.util", "uz.cluster.db.entity.references.model", "uz.cluster.configuration", "uz.cluster.db.model", "uz.cluster.db.entity.forms"})
+@EntityScan(basePackages = {"uz.cluster.entity.forms", "uz.cluster.entity.auth", "uz.cluster.model", "uz.cluster.entity.references.model", "uz.cluster.db.composite_keys", "uz.cluster.services.form_services", "uz.cluster.services"})
+@SpringBootApplication(scanBasePackages = {"uz.cluster.util", "uz.cluster.entity.references.model", "uz.cluster.configuration", "uz.cluster.entity.forms"})
 public class ClusterApplication extends SpringBootServletInitializer {
 
     @Override

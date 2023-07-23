@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import uz.cluster.db.entity.references.model.Form;
-import uz.cluster.db.services.references_service.FormService;
+import uz.cluster.entity.references.model.Form;
+import uz.cluster.services.references_service.FormService;
 import uz.cluster.util.GlobalParams;
 
 import java.util.List;

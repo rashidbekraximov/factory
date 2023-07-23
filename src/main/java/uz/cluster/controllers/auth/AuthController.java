@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import uz.cluster.db.model.JwtResponse;
-import uz.cluster.db.services.auth_service.AuthService;
+import uz.cluster.security.JwtResponse;
+import uz.cluster.services.auth_service.AuthService;
 import uz.cluster.payload.auth.LoginDTO;
 
 import javax.validation.Valid;

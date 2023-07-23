@@ -15,8 +15,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-import uz.cluster.db.entity.references.model.Status;
-import uz.cluster.db.types.Nls;
 
 import javax.annotation.PostConstruct;
 import java.time.format.DateTimeFormatter;
