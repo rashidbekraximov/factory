@@ -1,0 +1,50 @@
+package uz.cluster.configuration;
+
+import org.springframework.data.domain.AuditorAware;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import uz.cluster.db.entity.auth.User;
+
+import javax.validation.constraints.NotNull;
+import java.util.Optional;
+
+public class SpringSecurityAuditorAware implements AuditorAware<Integer> {
+
+    public @NotNull Optional<Integer> getCurrentAuditor() {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return Optional.empty();
+        }
+        int id = -1;
+        if (authentication.getPrincipal() instanceof User)
+          id = ((User) authentication.getPrincipal()).getId();
+        return Optional.of(id);
+    }
+
+
+    public @NotNull Optional<Integer> getCurrentClusterId() {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return Optional.empty();
+        }
+
+        if (authentication.getPrincipal() instanceof User)
+            return Optional.of(((User) authentication.getPrincipal()).getClusterId());
+        return Optional.of(-1);
+    }
+
+    public @NotNull Optional<User> getCurrentUser() {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return Optional.empty();
+        }
+
+        return Optional.of(((User) authentication.getPrincipal()));
+    }
+}
