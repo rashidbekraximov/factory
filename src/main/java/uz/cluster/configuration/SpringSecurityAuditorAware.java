@@ -18,11 +18,11 @@ public class SpringSecurityAuditorAware implements AuditorAware<Integer> {
             return Optional.empty();
         }
         int id = -1;
-        if (authentication.getPrincipal() instanceof User)
-          id = ((User) authentication.getPrincipal()).getId();
+        if (authentication.getPrincipal() instanceof Integer)
+            id = (Integer) authentication.getPrincipal();
+
         return Optional.of(id);
     }
-
 
     public @NotNull Optional<Integer> getCurrentClusterId() {
 
@@ -31,20 +31,18 @@ public class SpringSecurityAuditorAware implements AuditorAware<Integer> {
         if (authentication == null || !authentication.isAuthenticated()) {
             return Optional.empty();
         }
-
         if (authentication.getPrincipal() instanceof User)
             return Optional.of(((User) authentication.getPrincipal()).getClusterId());
         return Optional.of(-1);
     }
 
     public @NotNull Optional<User> getCurrentUser() {
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null || !authentication.isAuthenticated()) {
             return Optional.empty();
         }
-
         return Optional.of(((User) authentication.getPrincipal()));
     }
+
 }

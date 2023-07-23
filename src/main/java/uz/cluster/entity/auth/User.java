@@ -17,6 +17,7 @@ import uz.cluster.entity.Auditable;
 import uz.cluster.entity.references.model.Gender;
 import uz.cluster.entity.references.model.Role;
 import uz.cluster.enums.auth.SystemRoleName;
+import uz.cluster.util.DateUtil;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -160,4 +161,8 @@ public class User extends Auditable  implements UserDetails {
         return null;
     }
 
+    @Hidden
+    public String getBirthdayString() {
+        return DateUtil.convertToDateString(birthday);
+    }
 }

@@ -10,12 +10,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import uz.cluster.entity.auth.User;
 import uz.cluster.dao.SessionDto;
 import uz.cluster.response.AppErrorDto;
 import uz.cluster.response.DataDto;
 import uz.cluster.payload.auth.LoginDTO;
+import uz.cluster.security.JwtResponse;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -33,7 +36,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         this.authenticationManager = authenticationManager;
         super.setFilterProcessesUrl("/auth/login");
     }
-
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
@@ -53,12 +55,22 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         User user = (User) authentication.getPrincipal();
         Date expiryForAccessToken = JwtUtils.getExpiry();
         Date expiryForRefreshToken = JwtUtils.getExpiryForRefreshToken();
+
+        SecurityContext sc = SecurityContextHolder.getContext();
+        sc.setAuthentication(authentication);
         String accessToken = JWT.create()
                 .withSubject(user.getUsername())
                 .withExpiresAt(expiryForAccessToken)
                 .withIssuer(request.getRequestURL().toString())
                 .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+                .withClaim("activeUserId", user.getId())
                 .sign(JwtUtils.getAlgorithm());
+
+        JwtResponse jwtResponse = new JwtResponse(accessToken,true, user.getFio(), user.getFirstName(),
+                user.getLastName(), user.getMiddleName(), user.getBirthdayString(),
+                user.getEmail(), user.getLogin(),
+                user.getSystemRoleName().name(), user.getClusterId(), user.getNotes()
+        );
 
         String refreshToken = JWT.create()
                 .withSubject(user.getUsername())
@@ -66,10 +78,11 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .withIssuer(request.getRequestURL().toString())
                 .sign(JwtUtils.getAlgorithm());
 
+
         SessionDto sessionDto = SessionDto.builder()
                 .accessToken(accessToken)
                 .accessTokenExpiry(expiryForAccessToken.getTime())
-                .user(user)
+                .user(jwtResponse)
                 .refreshToken(refreshToken)
                 .refreshTokenExpiry(expiryForRefreshToken.getTime())
                 .issuedAt(System.currentTimeMillis())
@@ -77,7 +90,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), new DataDto<>(sessionDto));
-
     }
 
     @Override

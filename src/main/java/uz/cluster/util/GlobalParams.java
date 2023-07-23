@@ -1,13 +1,12 @@
 package uz.cluster.util;
 
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.ui.Model;
+import uz.cluster.component.UserComponent;
 import uz.cluster.configuration.SpringSecurityAuditorAware;
 import uz.cluster.entity.auth.User;
 import uz.cluster.entity.references.model.Form;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class GlobalParams {
     //parametr sifatida kiritishni qilishimiz kerak
@@ -44,12 +43,15 @@ public class GlobalParams {
         }
         return activeUserId;
     }
+
     public static User getCurrentUser() {
         SpringSecurityAuditorAware s = new SpringSecurityAuditorAware();
-        User activeUser = null;
-        if (s.getCurrentUser().isPresent()){
-            activeUser = s.getCurrentUser().get();
+        if (s.getCurrentAuditor().isPresent() && s.getCurrentAuditor().get() != -1){
+            return UserComponent.getById(s.getCurrentAuditor().get());
         }
-        return activeUser;
+        if (s.getCurrentUser().isPresent()){
+            return s.getCurrentUser().get();
+        }
+        return new User();
     }
 }
