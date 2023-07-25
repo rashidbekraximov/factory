@@ -104,10 +104,6 @@ public class AuthService implements UserDetailsService{
     }
 
 
-    public User getByUserIdComponent(int id) {
-        return userRepository.findById(id).orElse(new User());
-    }
-
     @Transactional
     @CheckPermission(form = FormEnum.ADMIN_PANEL, permission = Action.CAN_EDIT)
     public ApiResponse edit(UserDTO userDTO, MultipartHttpServletRequest request, int id) {

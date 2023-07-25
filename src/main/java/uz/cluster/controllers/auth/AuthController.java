@@ -18,7 +18,7 @@ public class AuthController  {
 
     private final AuthService authService;
 
-    @PostMapping("/auth/login")
+    @PostMapping("/api/auth/login")
     public HttpEntity<?> login(@RequestBody @Valid LoginDTO loginDTO){
         JwtResponse jwtResponse = authService.login(loginDTO);
         return ResponseEntity.status(jwtResponse.isSuccess() ? 200 : 403).body(jwtResponse);

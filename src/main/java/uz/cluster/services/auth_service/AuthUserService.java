@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import uz.cluster.entity.auth.User;
 import uz.cluster.repository.user_info.UserRepository;
 
 @Service
@@ -19,4 +20,7 @@ public class AuthUserService implements AbstractService, UserDetailsService {
         return authUserRepository.findByLogin(login).orElseThrow(() -> new UsernameNotFoundException(login));
     }
 
+    public User getByUserIdComponent(int id) {
+        return authUserRepository.findById(id).orElse(new User());
+    }
 }
