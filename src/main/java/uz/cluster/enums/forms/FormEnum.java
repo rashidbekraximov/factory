@@ -5,9 +5,7 @@ import lombok.Setter;
 
 public enum FormEnum {
     FORM(100),
-    FORM_1(1),
-    FORM_2(2),
-    FORM_3(3),
+    SPARE_PART(10),
 
 
     REPORT(100),
